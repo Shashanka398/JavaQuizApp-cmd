@@ -1,0 +1,31 @@
+[
+  {
+    "id": "1",
+    "question": "What is the main purpose of a constructor in Java?",
+    "options": [
+      "To initialize class variables",
+      "To create objects of a class",
+      "To define methods of a class",
+      "To destroy objects of a class"
+    ],
+    "answer": 2
+  },
+  {
+    "id": "2",
+    "question": "Which access modifier is used to specify that a method or variable can be accessed only within its own class?",
+    "options": ["public","private","protected","static"],
+    "answer": 2
+  },
+  {
+    "id": "3",
+    "question": "What is the default value of a boolean variable in Java?",
+    "options": ["true","false","0","null"],
+    "answer": 2
+  },
+  {
+    "id": "4",
+    "question": "In Java, which keyword is used to implement multiple inheritance?",
+    "options": ["extends","implements","inherit","extends and implements"],
+    "answer": 2
+  }
+]

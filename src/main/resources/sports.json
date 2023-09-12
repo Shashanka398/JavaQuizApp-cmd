@@ -1,0 +1,26 @@
+[
+  {
+    "id": "1",
+    "question": "Who is known as the 'Flying Sikh'?",
+    "options": ["Milkha Singh","Kapil Dev","Sachin Tendulkar","Virat Kohli"],
+    "answer": 1
+  },
+  {
+    "id": "2",
+    "question": "Which country has won the most FIFA World Cup titles?",
+    "options": ["Germany","Brazil","Italy","Argentina"],
+    "answer": 2
+  },
+  {
+    "id": "3",
+    "question": "In which sport would you perform a slam dunk?",
+    "options": ["Tennis","Basketball","Golf","Cricket"],
+    "answer": 2
+  },
+  {
+    "id": "4",
+    "question": "Who holds the record for the most home runs in Major League Baseball (MLB) history?",
+    "options": ["Babe Ruth","Hank Aaron","Barry Bonds","Willie Mays"],
+    "answer": 3
+  }
+]
