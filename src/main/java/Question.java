@@ -1,6 +1,6 @@
 import java.util.List;
 
-public class YourObjectClass {
+public class Question {
     private int id;
     private String name;
     private String question;
