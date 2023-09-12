@@ -1,35 +1,34 @@
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class QuizManager {
-
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Enter your name: ");
         String userName = scanner.nextLine();
-        System.out.println("Enter your  Catergory you are intrested in ");
-        System.out.println("    1.GK     2.Sports       3.Java Quiz");
+        System.out.println("Enter the category you are interested in:");
+        System.out.println("    1. GK     2. Sports       3. Java Quiz");
         int choice = scanner.nextInt();
-        String path = "";
+        String fileName = "";
+
         if (choice == 1) {
-            path = "src/main/resources/gk.json";
+            fileName = "gk.json";
         } else if (choice == 2) {
-            path = "src/main/resources/sports.json";
+            fileName = "sports.json";
         } else if (choice == 3) {
-            path = "src/main/resources/java.json";
+            fileName = "java.json";
         } else {
-            System.out.println("Please enter valid option");
+            System.out.println("Please enter a valid option");
+            return;
         }
-        ObjectMapper objectMapper = new ObjectMapper();
+        ClassLoader classLoader = QuizManager.class.getClassLoader();
+        String path = Objects.requireNonNull(classLoader.getResource(fileName)).getPath();
+
         try {
-            List<Question> list = objectMapper.readValue(new File(path), new TypeReference<List<Question>>() {
-            });
-            QuizService quizManager = new QuizService(list, userName);
+            List<Question> questionList = Util.readQuestionsFromFile(path);
+            QuizService quizManager = new QuizService(questionList, userName);
             quizManager.startQuiz();
         } catch (IOException e) {
             e.printStackTrace();

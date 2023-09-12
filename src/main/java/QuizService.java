@@ -1,12 +1,12 @@
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Scanner;
+import java.util.*;
+
 //Quetion
 public class QuizService {
     private List<Question> questions;
     private String userName;
     private Scanner scanner;
+    private   Map<String, String> questionList = new LinkedHashMap<>();
+    private   Map<String, String> answerList = new LinkedHashMap<>();
 
     public QuizService(List<Question> questions, String userName) {
         this.questions = questions;
@@ -16,8 +16,6 @@ public class QuizService {
 
     public void startQuiz() {
         int score = 0;
-        List<String> answerList = new ArrayList<>();
-
         for (Question question : questions) {
             String individualQuestion= question.getQuestion();
             System.out.println(individualQuestion);
@@ -25,7 +23,6 @@ public class QuizService {
             for (int i = 0; i < options.size(); i++) {
                 System.out.println((i + 1) + ". " + options.get(i));
             }
-
             System.out.print("Enter your answer (1-" + options.size() + "): ");
             int userAnswer = scanner.nextInt();
             scanner.nextLine();
@@ -37,12 +34,11 @@ public class QuizService {
 
             if (userAnswer == question.getAnswer()) {
                 score++;
-            } else {
-                answerList.add(individualQuestion);
-                answerList.add(" Your answer is :"+options.get(userAnswer-1));
-                answerList.add(" But the correct answer is: " + options.get(question.getAnswer() - 1));
-                answerList.add(" ");
             }
+            questionList.put(individualQuestion,options.get(question.getAnswer()-1));
+            answerList.put(individualQuestion, options.get(userAnswer-1));
+            System.out.println();
+
         }
         System.out.println();
         System.out.println(userName + ", your score is: " + score + " out of " + questions.size());
@@ -50,14 +46,24 @@ public class QuizService {
         System.out.print("Do you want to see your incorrect  answers  if yes type 'y' or type 'n' ");
         System.out.println();
         String option = scanner.nextLine();
-        if(answerList.size()>0)
+
+        if(!answerList.isEmpty())
         {
             if( Objects.equals(option, "Y") ||  Objects.equals(option, "y"))
-            {   System.out.println("Answer for your incorrectly answered Questions :");
+            {
                 System.out.println();
-                for (String s : answerList) {
-                    System.out.println(s);
-
+                for (String question : questionList.keySet()) {
+                    String crtAns =questionList.get(question);
+                    String usrAns=answerList.get(question);
+                    System.out.println("Question: " + question );
+                    if(Objects.equals(questionList.get(question), answerList.get(question)))
+                    {
+                        System.out.println("Your Answer is :  " +usrAns+ "|  Correct Answer is : " +crtAns);
+                        System.out.println("Your answer is correct !!");
+                    }else {
+                        System.out.println("Your Answer is :  " +usrAns+ " | Correct Answer is : " +crtAns);
+                    }
+                    System.out.println();
                 }
             }
         }else {
