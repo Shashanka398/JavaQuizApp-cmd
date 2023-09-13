@@ -5,8 +5,8 @@ public class QuizService {
     private List<Question> questions;
     private String userName;
     private Scanner scanner;
-    private   Map<String, String> questionList = new LinkedHashMap<>();
-    private   Map<String, String> answerList = new LinkedHashMap<>();
+    private   Map<String, String> questionMap = new LinkedHashMap<>();
+    private   Map<String, String> answerMap = new LinkedHashMap<>();
 
     public QuizService(List<Question> questions, String userName) {
         this.questions = questions;
@@ -35,8 +35,8 @@ public class QuizService {
             if (userAnswer == question.getAnswer()) {
                 score++;
             }
-            questionList.put(individualQuestion,options.get(question.getAnswer()-1));
-            answerList.put(individualQuestion, options.get(userAnswer-1));
+            questionMap.put(individualQuestion,options.get(question.getAnswer()-1));
+            answerMap.put(individualQuestion, options.get(userAnswer-1));
             System.out.println();
 
         }
@@ -47,16 +47,16 @@ public class QuizService {
         System.out.println();
         String option = scanner.nextLine();
 
-        if(!answerList.isEmpty())
+        if(!answerMap.isEmpty())
         {
             if( Objects.equals(option, "Y") ||  Objects.equals(option, "y"))
             {
                 System.out.println();
-                for (String question : questionList.keySet()) {
-                    String crtAns =questionList.get(question);
-                    String usrAns=answerList.get(question);
+                for (String question : questionMap.keySet()) {
+                    String crtAns =questionMap.get(question);
+                    String usrAns=answerMap.get(question);
                     System.out.println("Question: " + question );
-                    if(Objects.equals(questionList.get(question), answerList.get(question)))
+                    if(Objects.equals(questionMap.get(question), answerMap.get(question)))
                     {
                         System.out.println("Your Answer is :  " +usrAns+ "|  Correct Answer is : " +crtAns);
                         System.out.println("Your answer is correct !!");

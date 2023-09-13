@@ -12,7 +12,6 @@ public class QuizManager {
         System.out.println("    1. GK     2. Sports       3. Java Quiz");
         int choice = scanner.nextInt();
         String fileName = "";
-
         if (choice == 1) {
             fileName = "gk.json";
         } else if (choice == 2) {
@@ -25,11 +24,13 @@ public class QuizManager {
         }
         ClassLoader classLoader = QuizManager.class.getClassLoader();
         String path = Objects.requireNonNull(classLoader.getResource(fileName)).getPath();
-
         try {
             List<Question> questionList = Util.readQuestionsFromFile(path);
-            QuizService quizManager = new QuizService(questionList, userName);
-            quizManager.startQuiz();
+             if(!questionList.isEmpty())
+             {
+                 QuizService quizService = new QuizService(questionList, userName);
+                 quizService.startQuiz();
+             }
         } catch (IOException e) {
             e.printStackTrace();
         }
